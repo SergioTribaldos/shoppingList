@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-title>
+            {{listName}}
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <app-items-list
+            [tickedItems$]="tickedItems$"
+            [untickedItems$]="untickedItems$"
+            (removeProduct)="removeProduct($event)"
+            (moveToTickedList)="moveToTickedList($event)"
+            (moveToUntickedList)="moveToUntickedList($event)"
+            (editProductName)="editProductName($event)"
+            (addEmptyProduct)="addEmptyProduct()"
+    ></app-items-list>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-icon class="menu-icon" name="ellipsis-vertical" (click)="presentPopover($event)"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

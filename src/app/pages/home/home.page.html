@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-title slot="start">
+            Tus Listas
+        </ion-title>
+        <ion-item color="primary">
+            <ion-avatar slot="end">
+                <img [src]="(userPictureUrl$|async)" alt="">
+            </ion-avatar>
+        </ion-item>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <app-list-preview *ngFor="let list of userLists$|async" [list]="list" [userId]="userEmail" (navigateToList)="navigateToList($event)">
+    </app-list-preview>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="showAddToShoppingListModal()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
+

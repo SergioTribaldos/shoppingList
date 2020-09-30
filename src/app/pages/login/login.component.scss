@@ -1,0 +1,31 @@
+ion-content{
+  --background: var(--ion-color-tertiary);
+}
+
+h1{
+  text-align: center;
+  color: aliceblue;
+  font-size: 36px;
+  font-family: 'Fredoka';
+  margin-top: 60px;
+
+}
+
+.image-container{
+  width: 50%;
+  margin: 65px auto 66px;
+}
+
+img{
+  border: 1px solid transparent;
+  border-radius: 146px;
+}
+
+ion-button{
+  margin-top: 30px;
+}
+
+.login-text{
+  margin-left: 10px;
+}
+

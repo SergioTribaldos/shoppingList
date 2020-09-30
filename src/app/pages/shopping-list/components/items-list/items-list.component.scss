@@ -1,0 +1,33 @@
+*{
+  font-family: Montserrat !important;
+}
+.untickedList{
+  filter: opacity(.4);
+
+  ion-input{
+    text-decoration:line-through ;
+  }
+}
+
+ion-icon[name="close-outline"]{
+  font-size: 26px !important;
+}
+
+ion-checkbox{
+  width: 22px;
+  height: 22px;
+}
+
+.removeButton{
+  z-index: 1000;
+}
+
+.active{
+  animation-name: example;
+  animation-duration: .8s;
+}
+
+@keyframes example {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

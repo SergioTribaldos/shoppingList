@@ -1,0 +1,43 @@
+<ion-list lines="none">
+    <ion-item *ngFor="let product of untickedItems$|async; trackBy: trackById">
+        <ion-checkbox slot="start" checked="false" (click)="moveToTickedList.emit(product)"></ion-checkbox>
+        <ion-input #input debounce="800" value="{{product.productName}}"
+                   (ionChange)="editProductName.emit({productName:input.value,product:product})"
+                   (ionFocus)="showDeleteButton(removeProductButton)"
+                   (ionBlur)="hideDeleteButton(removeProductButton)"
+        >
+        </ion-input>
+
+        <ion-button #removeProductButton hidden shape="round" fill="clear" class="removeButton active"
+                    (mousedown)="removeProduct.emit(product)">
+            <ion-icon color="danger" slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+    </ion-item>
+
+</ion-list>
+<ion-list lines="none">
+    <ion-item button (click)="addEmptyProduct.emit()">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        <ion-label>
+            Añadir a la lista
+        </ion-label>
+    </ion-item>
+</ion-list>
+<ion-item-divider></ion-item-divider>
+<ion-list class="untickedList" lines="none">
+    <ion-item *ngFor="let product of tickedItems$|async">
+        <ion-checkbox color="dark" checked="true" slot="start"
+                      (click)="moveToUntickedList.emit(product)"></ion-checkbox>
+        <ion-input #input2 debounce="500" value="{{product.productName}}"
+                   (ionFocus)="showDeleteButton(removeProductButton2)"
+                   (ionBlur)="hideDeleteButton(removeProductButton2);
+                                  editProductName.emit({productName:input2.value,product:product})
+"
+
+        >
+        </ion-input>
+        <ion-button #removeProductButton2 shape="round" fill="clear" (click)="removeProduct.emit(product)">
+            <ion-icon color="dark" slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+    </ion-item>
+</ion-list>

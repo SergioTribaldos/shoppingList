@@ -1,0 +1,20 @@
+<ion-card (click)="enterList()">
+  <ion-card-header>
+    <ion-card-title>
+      {{list.listName}}
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+
+  </ion-card-content>
+  <div>
+<ion-grid>
+  <ion-row class="ion-justify-content-start">
+    <ion-avatar *ngFor="let picture of list.members|keyvalue">
+      <img *ngIf="picture.key!==userId" [src]="picture.value.photoURL" [alt]="picture.value.userId" >
+    </ion-avatar>
+  </ion-row>
+</ion-grid>
+  </div>
+</ion-card>
