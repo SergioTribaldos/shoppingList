@@ -5,8 +5,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HomePage} from './home.page';
 
 import {HomePageRoutingModule} from './home-routing.module';
-import {ItemsListComponent} from '../shopping-list/components/items-list/items-list.component';
 import {ListPreviewComponent} from './components/list-preview/list-preview.component';
+import {InvitationsModalComponent} from './components/invitations-modal/invitations-modal.component';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import {ListPreviewComponent} from './components/list-preview/list-preview.compo
         HomePageRoutingModule,
         ReactiveFormsModule,
     ],
-    declarations: [HomePage, ListPreviewComponent]
+    declarations: [HomePage, ListPreviewComponent,InvitationsModalComponent]
 })
 export class HomePageModule {
 }

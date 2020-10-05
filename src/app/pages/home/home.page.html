@@ -13,12 +13,25 @@
 
 <ion-content>
 
-    <app-list-preview *ngFor="let list of userLists$|async" [list]="list" [userId]="userEmail" (navigateToList)="navigateToList($event)">
-    </app-list-preview>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let list of userLists$|async" size="6">
+                <app-list-preview  [list]="list" [userId]="userEmail" (navigateToList)="navigateToList($event)">
+                </app-list-preview>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="showAddToShoppingListModal()">
             <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+        <ion-badge color="danger">{{invitationsNumber$|async}}</ion-badge>
+        <ion-fab-button (click)="openInvitationsPopover($event)">
+            <ion-icon name="notifications-outline"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 </ion-content>
