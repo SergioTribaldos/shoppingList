@@ -17,7 +17,7 @@ import {Invitation} from '../../core/types/interfaces/invitation';
     styleUrls: ['home.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomePage {
+export class HomePage implements OnDestroy {
 
     userLists$: Observable<List[]>;
     userInvitations$: Observable<Invitation[]>;
@@ -26,6 +26,7 @@ export class HomePage {
     userEmail: string;
     userPictureUrl: string;
     userDisplayName: string;
+    destroy$: Subject<boolean> = new Subject<boolean>();
 
     constructor(private authService: AuthService,
                 private firebaseService: FirebaseService,
@@ -35,6 +36,7 @@ export class HomePage {
 
 
         from(this.authService.getUserDetails()).pipe(
+            takeUntil(this.destroy$),
             map((user: User) => {
                 this.userEmail = user.email;
                 this.userPictureUrl = user.photoURL;
@@ -55,6 +57,11 @@ export class HomePage {
                 this.invitationsNumber$.next(invitationsLength);
             })
         ).subscribe();
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.complete();
     }
 
     async showAddToShoppingListModal() {
