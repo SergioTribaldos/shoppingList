@@ -1,25 +1,35 @@
 import {Component, OnInit} from '@angular/core';
-import {distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {combineLatest, distinctUntilChanged, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {Product} from '../home/home.page';
 import {FirebaseService} from '../../services/firebase.service';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalController, PopoverController} from '@ionic/angular';
 import {PopoverComponent} from './components/popover/popover.component';
 import {AlertService} from '../../services/alert.service';
 import {ModalComponent} from './components/modal/modal.component';
 
+
+export interface ShoppingList {
+    listName: string;
+    createdBy: string;
+    members: object;
+}
+
 @Component({
     selector: 'app-shopping-list',
     templateUrl: './shopping-list.component.html',
     styleUrls: ['./shopping-list.component.scss'],
 })
+
 export class ShoppingListComponent implements OnInit {
     listId: string;
     listName: string;
+    listMembers;
 
     tickedItems$: Subject<Product[]> = new Subject<Product[]>();
     untickedItems$: Subject<Product[]> = new Subject<Product[]>();
+    shoppingList$: BehaviorSubject<ShoppingList> = new BehaviorSubject<ShoppingList>({listName: '', createdBy: '', members: {}});
 
     constructor(private firebaseService: FirebaseService,
                 private route: ActivatedRoute,
@@ -29,19 +39,25 @@ export class ShoppingListComponent implements OnInit {
                 public modalController: ModalController) {
 
         this.route.queryParams.pipe(
-            tap((list) => {
-                const t=JSON.parse(list.members)
+            map((list) => {
+                list = JSON.parse(list.data);
                 this.listName = list.listName;
                 this.listId = list.id;
+                this.listMembers = list.members;
+                return list;
             }),
             switchMap(({id}) => this.firebaseService.listenToSelectedListChanges(id)),
             distinctUntilChanged(),
-            tap((shoppingList: Product[]) => {
-                console.log(8);
-                const tickedItems = shoppingList.filter((product) => product.ticked);
-                const untickedItems = shoppingList.filter((product) => !product.ticked);
+            tap((list) => {
+                const tickedItems = list.filter((product) => product.ticked);
+                const untickedItems = list.filter((product) => !product.ticked);
                 this.tickedItems$.next(tickedItems);
                 this.untickedItems$.next(untickedItems);
+            }),
+            switchMap(() => this.firebaseService.listenToShoppingListChanges(this.listId)),
+            distinctUntilChanged(),
+            tap((shoppingList) => {
+                this.shoppingList$.next(shoppingList);
             })
         ).subscribe();
     }
@@ -105,11 +121,10 @@ export class ShoppingListComponent implements OnInit {
 
 
     async addCollaborator() {
-  /*      const modal = await this.modalController.create({
+        const modal = await this.modalController.create({
             component: ModalComponent,
-            componentProps:
+            componentProps: {shoppingList: this.shoppingList$, listId: this.listId}
         });
-        return await modal.present();
-    }*/
+        await modal.present();
     }
 }

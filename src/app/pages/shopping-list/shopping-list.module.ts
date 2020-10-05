@@ -7,6 +7,7 @@ import {ItemsListComponent} from './components/items-list/items-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {PopoverComponent} from './components/popover/popover.component';
+import {ModalComponent} from './components/modal/modal.component';
 
 const routes: Routes = [
     {
@@ -16,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [ShoppingListComponent, ItemsListComponent, PopoverComponent],
+    declarations: [ShoppingListComponent, ItemsListComponent, PopoverComponent,ModalComponent],
     imports: [
         CommonModule,
         FormsModule,
