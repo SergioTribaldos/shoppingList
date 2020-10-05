@@ -2,8 +2,37 @@ ion-footer{
   display: flex;
 }
 
+ion-card{
+  margin:0
+}
+
 img, ion-avatar{
-  margin-left: 10px;
+  margin-right: 7px;
   height: 40px;
   width: 40px;
+}
+ion-card-content{
+  padding-bottom:0
+}
+small{
+  margin-top: 4px;
+}
+
+ion-card-title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-name-column{
+  padding-right: 20px;
+}
+
+.products-list-column{
+  opacity: .8;
+}
+
+.users-list-container{
+  margin: 8px 7px;
+
 }

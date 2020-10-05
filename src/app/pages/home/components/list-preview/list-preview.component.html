@@ -1,20 +1,57 @@
 <ion-card (click)="enterList()">
-  <ion-card-header>
-    <ion-card-title>
-      {{list.listName}}
-    </ion-card-title>
-  </ion-card-header>
+    <ion-card-header>
+        <ion-card-title>
+            {{list.listName}}
+        </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <div *ngFor="let product of list.list">▢ {{product.productName}}</div>
+        <small *ngIf="remainingProducts>0">Mas de {{remainingProducts}} elementos</small>
 
+    </ion-card-content>
+    <div class="users-list-container">
+        <ion-grid>
+            <ion-row class="ion-justify-content-start">
+                <div *ngFor="let picture of list.members|keyvalue">
+                    <ion-avatar *ngIf="picture.key!==userId">
+                        <img
+                                [src]="!!picture.value.photoURL?picture.value.photoURL:'./assets/unconfirmed.jpg'"
+                                [alt]="picture.value.userId">
+                    </ion-avatar>
+                </div>
+
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-card>
+
+<!--<ion-card (click)="enterList()">
   <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="list-name-column" size="7">
+          <ion-card-title>
+            {{list.listName}}
+          </ion-card-title>
+        </ion-col>
+        <ion-col class="products-list-column" size="5">
+          <div *ngFor="let product of list.list">▢ {{product.productName}}</div>
+          <small *ngIf="remainingProducts>0">Mas de {{remainingProducts}} elementos</small>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   </ion-card-content>
   <div>
 <ion-grid>
   <ion-row class="ion-justify-content-start">
-    <ion-avatar *ngFor="let picture of list.members|keyvalue">
-      <img *ngIf="picture.key!==userId" [src]="picture.value.photoURL" [alt]="picture.value.userId" >
-    </ion-avatar>
+    <div *ngFor="let picture of list.members|keyvalue">
+      <ion-avatar *ngIf="picture.key!==userId" >
+        <img  [src]="!!picture.value.photoURL?picture.value.photoURL:'./assets/unconfirmed.jpg'" [alt]="picture.value.userId" >
+      </ion-avatar>
+    </div>
+
   </ion-row>
 </ion-grid>
   </div>
-</ion-card>
+</ion-card>-->

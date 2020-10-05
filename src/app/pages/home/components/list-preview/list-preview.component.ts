@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {List} from '../../home.page';
 
 @Component({
     selector: 'app-list-preview',
@@ -8,17 +9,26 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output}
 })
 export class ListPreviewComponent implements OnInit {
 
-    @Input() list: any;
+    @Input() list: List;
     @Input() userId: string;
+
+    listSize: number;
+    remainingProducts: number;
+    readonly previewListSize = 3;
 
     @Output() navigateToList = new EventEmitter();
 
 
     constructor() {
-        console.log(this.list);
+
     }
 
     ngOnInit() {
+
+        console.log(this.list)
+        this.listSize = this.list.list.length;
+        this.remainingProducts = this.listSize - this.previewListSize;
+        this.list.list = this.list.list.slice(0, this.previewListSize);
     }
 
     enterList() {
