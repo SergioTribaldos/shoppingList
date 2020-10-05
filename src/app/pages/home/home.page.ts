@@ -1,41 +1,15 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {from, Observable, of, Subject} from 'rxjs';
+import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
+import {from, Observable, Subject} from 'rxjs';
 import {AuthService} from '../../services/auth.service';
 import {FirebaseService} from '../../services/firebase.service';
-import {exhaustMap, map, switchMap, tap} from 'rxjs/operators';
+import {exhaustMap, map, takeUntil, tap} from 'rxjs/operators';
 import {NavigationExtras, Router} from '@angular/router';
 import {AlertService} from '../../services/alert.service';
 import {User} from 'firebase';
 import {ModalController} from '@ionic/angular';
 import {InvitationsModalComponent} from './components/invitations-modal/invitations-modal.component';
-
-
-export interface Product {
-    id: string;
-    productName: string;
-    ticked: boolean;
-    created: Date;
-
-}
-
-export interface List {
-    id: string;
-    listName: string;
-    members: {
-        exist: boolean,
-        photoURL: string
-    };
-
-    list: Product[];
-}
-
-export interface Invitation {
-    listId: string;
-    inviter: string;
-    invited: string;
-    listName: string;
-
-}
+import {List} from '../../core/types/interfaces/list';
+import {Invitation} from '../../core/types/interfaces/invitation';
 
 @Component({
     selector: 'app-home',
@@ -72,7 +46,7 @@ export class HomePage {
                 this.userLists$ = this.firebaseService.getUserLists(this.userEmail);
                 return this.userLists$;
             }),
-            exhaustMap((list) => {
+            exhaustMap(() => {
                 this.userInvitations$ = this.firebaseService.listenToInvitationsChanges(this.userEmail);
                 return this.userInvitations$;
             }),
@@ -81,8 +55,6 @@ export class HomePage {
                 this.invitationsNumber$.next(invitationsLength);
             })
         ).subscribe();
-
-
     }
 
     async showAddToShoppingListModal() {
@@ -130,7 +102,7 @@ export class HomePage {
 
     }
 
-    async openInvitationsPopover($event) {
+    async openInvitationsPopover() {
         const popover = await this.modalController.create({
             component: InvitationsModalComponent,
             cssClass: 'my-custom-class',
