@@ -1,0 +1,34 @@
+*{
+  font-family: 'Montserrat' !important;
+}
+
+.name-email-fields{
+  font-size: 13px;
+  padding: 0 10px;
+
+  div{
+    margin: 5px 0;
+  }
+  div:first-child{
+    font-weight: bold;
+  }
+}
+
+ion-button{
+  --padding-start: 0;
+  --padding-end: 0;
+  margin-right: 20px;
+
+  ion-icon{
+    font-size: 26px;
+  }
+}
+
+ion-input{
+  margin: 0 10px ;
+}
+::ng-deep input::-webkit-input-placeholder{
+  font-size: 11px !important;
+}
+
+

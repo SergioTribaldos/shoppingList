@@ -1,3 +1,31 @@
-<p>
-  modal works!
-</p>
+<ion-content>
+    <ion-list>
+        <ion-list-header>
+            <ion-button (click)="closeModal()" shape="round" color="dark">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+            <div>Colaboradores</div>
+        </ion-list-header>
+        <ion-item *ngFor="let member of (shoppingList|async).members|keyvalue">
+            <ion-avatar>
+                <img [src]="member.value.confirmed ? member.value.photoURL : './assets/unconfirmed.jpg'">
+            </ion-avatar>
+
+            <ion-label class="name-email-fields">
+                <div>{{member.value.displayName}}</div>
+                <div>{{member.key}}</div>
+            </ion-label>
+            <ion-icon *ngIf="!member.value.accountCreator" name="close-outline" (click)="deleteUser(member.key)"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+            <ion-avatar>
+                <img src="./assets/unconfirmed.jpg" alt="">
+            </ion-avatar>
+            <ion-input #emailInput placeholder="Correo electronico que quieres agregar"></ion-input>
+            <ion-icon name="person-add-outline" (click)="addMember(emailInput.value);
+                                                                   emailInput.value='' "></ion-icon>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
