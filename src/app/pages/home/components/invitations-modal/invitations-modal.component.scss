@@ -1,0 +1,28 @@
+ion-button{
+  --padding-start: 0;
+  --padding-end: 0;
+  margin-right: 20px;
+
+  ion-icon{
+    font-size: 26px;
+  }
+}
+
+.invitation-data{
+  font-size: 14px;
+
+  div:nth-child(2){
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  div:nth-child(3){
+    font-weight: bold;
+  }
+}
+
+ion-icon[name='checkmark-outline']{
+  color: green;
+  font-size: 28px;
+}
+
