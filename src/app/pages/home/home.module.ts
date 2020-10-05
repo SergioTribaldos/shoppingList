@@ -15,9 +15,9 @@ import {InvitationsModalComponent} from './components/invitations-modal/invitati
         FormsModule,
         IonicModule,
         HomePageRoutingModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
-    declarations: [HomePage, ListPreviewComponent,InvitationsModalComponent]
+    declarations: [HomePage, ListPreviewComponent, InvitationsModalComponent]
 })
 export class HomePageModule {
 }

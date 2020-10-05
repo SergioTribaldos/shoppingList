@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Invitation, List, Product} from '../pages/home/home.page';
-import {forkJoin, Observable, of} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import * as firebase from 'firebase';
-import {concatMap, distinctUntilChanged, exhaustMap, map, mergeMap, switchMap, take, tap} from 'rxjs/operators';
-import {ShoppingList} from '../pages/shopping-list/shopping-list.component';
+import {concatMap, distinctUntilChanged, map, take, tap} from 'rxjs/operators';
+import {ShoppingList} from '../core/types/interfaces/shopping-list';
+import {Invitation} from '../core/types/interfaces/invitation';
+import {Product} from '../core/types/interfaces/product';
+import {List} from '../core/types/interfaces/list';
 
 
 @Injectable({

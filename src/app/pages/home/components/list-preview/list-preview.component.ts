@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {List} from '../../home.page';
+import {List} from '../../../../core/types/interfaces/list';
+
 
 @Component({
     selector: 'app-list-preview',
@@ -24,8 +25,6 @@ export class ListPreviewComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        console.log(this.list)
         this.listSize = this.list.list.length;
         this.remainingProducts = this.listSize - this.previewListSize;
         this.list.list = this.list.list.slice(0, this.previewListSize);

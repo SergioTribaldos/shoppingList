@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import { Observable} from 'rxjs';
-import {Invitation} from '../../home.page';
 import {FirebaseService} from '../../../../services/firebase.service';
+import {Invitation} from '../../../../core/types/interfaces/invitation';
 
 
 @Component({

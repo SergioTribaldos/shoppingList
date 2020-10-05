@@ -11,6 +11,7 @@ import {InvitationsModalComponent} from './components/invitations-modal/invitati
 import {List} from '../../core/types/interfaces/list';
 import {Invitation} from '../../core/types/interfaces/invitation';
 
+
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',

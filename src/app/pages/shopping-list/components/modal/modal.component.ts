@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
-import {ShoppingList} from '../../shopping-list.component';
 import {take, tap} from 'rxjs/operators';
 import {FirebaseService} from '../../../../services/firebase.service';
 

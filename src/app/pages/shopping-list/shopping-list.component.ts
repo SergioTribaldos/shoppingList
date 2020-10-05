@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {combineLatest, distinctUntilChanged, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
-import {Product} from '../home/home.page';
+import { distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
 import {FirebaseService} from '../../services/firebase.service';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,13 +7,9 @@ import {ModalController, PopoverController} from '@ionic/angular';
 import {PopoverComponent} from './components/popover/popover.component';
 import {AlertService} from '../../services/alert.service';
 import {ModalComponent} from './components/modal/modal.component';
+import {Product} from '../../core/types/interfaces/product';
+import {ShoppingList} from '../../core/types/interfaces/shopping-list';
 
-
-export interface ShoppingList {
-    listName: string;
-    createdBy: string;
-    members: object;
-}
 
 @Component({
     selector: 'app-shopping-list',
@@ -95,7 +90,7 @@ export class ShoppingListComponent implements OnInit {
                     role: 'cancel',
                 }, {
                     text: 'Aceptar',
-                    handler: (val) => {
+                    handler: () => {
                         this.firebaseService.deleteList(this.listId).then(() => {
                             this.router.navigate(['home']);
                         });

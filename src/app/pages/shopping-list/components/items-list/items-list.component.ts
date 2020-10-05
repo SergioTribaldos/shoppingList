@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
-import {Product} from '../../../home/home.page';
-import {Observable, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 import {IonInput} from '@ionic/angular';
+import {Product} from '../../../../core/types/interfaces/product';
 
 @Component({
     selector: 'app-items-list',
